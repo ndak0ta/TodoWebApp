@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+import { Component } from 'react';
 import { Container } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 
-export class Layout extends Component {
+export class Layout extends Component<any, any> {
   static displayName = Layout.name;
 
   render() {
