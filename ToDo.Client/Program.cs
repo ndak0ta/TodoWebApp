@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Todo.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("appsettings.json");
 
 // Add services to the container.
+builder.Services.AddDbContext<TodoDbContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
 builder.Services.AddControllersWithViews();
 
@@ -13,16 +19,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+   pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
-;
+
 
 app.Run();
