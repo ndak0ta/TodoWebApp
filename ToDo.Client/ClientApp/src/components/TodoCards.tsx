@@ -1,32 +1,31 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {Container, Grid} from "@mui/material";
-import ToDoCard from "./ToDoCard";
+import TodoCard from "./TodoCard";
 import axios from "axios"
 
-interface IToDoProps {
-    id: Number,
+type TodoItem = {
+    id: number,
     header: string,
     body: string,
     date: Date
 }
 
-export default function ToDoCardLayout() {
-    const [toDos, setData] = useState(null);
+export default function TodoCards() {
+    const [todoItems, setTodoItems] = useState<Array<TodoItem> | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
 
     useEffect(() => {
         const getData = async () => {
             try {
                 const response = await axios.get('todo');
-                
-                setData(response.data);
+
+                setTodoItems(response.data);
                 setError(null);
             } catch (err: any) {
                 setError(err.message);
-                setData(null);
+                setTodoItems(null);
             } finally {
                 setLoading(false);
             }
@@ -35,15 +34,25 @@ export default function ToDoCardLayout() {
         getData();
     }, []);
 
+    const handleRemoveTodo = async (id: number) => {
+        await axios.delete("todo/" + id)
+            .then(() => {
+                if (todoItems === null)
+                    return
+                const filteredTodoItems = todoItems.filter((todo: TodoItem) => id !== todo.id);
+                setTodoItems(filteredTodoItems);
+            })
+    }
+
     return (
         <Container>
             {loading && <div>Yükleniyor...</div>}
             {error && (<div>{`Hata - ${error}`}</div>)}
 
             <Grid container spacing={15}>
-                {toDos && (toDos as IToDoProps[]).map((toDo: IToDoProps) => (
+                {todoItems && (todoItems as TodoItem[]).map((todoItem: TodoItem) => (
                     <Grid item xl={3}>
-                        <ToDoCard header={toDo.header} body={toDo.body} date={toDo.date}/>
+                        <TodoCard todoItem={todoItem} onRemoveTodo={handleRemoveTodo}/>
                     </Grid>
                 ))}
             </Grid>

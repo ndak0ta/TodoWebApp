@@ -1,13 +1,13 @@
 import * as React from 'react';
 import './App.css';
 import NavBar from "./components/NavBar";
-import ToDoCardLayout from "./components/ToDoCardLayout";
+import TodoCards from "./components/TodoCards";
 
 export default function App() {
     return(
         <div>
             <NavBar/>
-            <ToDoCardLayout/>
+            <TodoCards/>
         </div>
     );
 }

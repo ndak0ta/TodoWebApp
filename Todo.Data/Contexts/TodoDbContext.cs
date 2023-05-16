@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Todo.Data.Models;
 
-namespace Todo.Data;
+namespace Todo.Data.Contexts;
 
 public class TodoDbContext : DbContext
 {
@@ -8,10 +9,5 @@ public class TodoDbContext : DbContext
     {
     }
     
-    public DbSet<Todo> ToDo { get; set; }
-
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // {
-    //     optionsBuilder.UseSqlServer("Server=localhost;Database=todo;User Id=sa;Password=123ASDzxc.;");
-    // }
+    public DbSet<TodoItem> ToDo { get; set; }
 }

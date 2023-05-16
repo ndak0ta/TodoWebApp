@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Todo.Data;
+namespace Todo.Data.Models;
 
-public class Todo
+public class TodoItem
 {
     [Key]
     public int Id { get; set; } 
