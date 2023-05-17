@@ -43,9 +43,9 @@ public class TodoController : ControllerBase
         if (todoItem == null)
             return BadRequest("Invalid TodoItem data.");
 
-        _todoRepository.Add(todoItem);
+        var result = _todoRepository.Add(todoItem);
 
-        return Ok();
+        return result ? Ok() : BadRequest("İşlem tamamlanamadı");
     }
 
     [HttpPut("{id:int}")]
@@ -68,8 +68,8 @@ public class TodoController : ControllerBase
     [HttpDelete("{id:int}")]
     public IActionResult Delete(int id)
     {
-        _todoRepository.Delete(id);
+        var result = _todoRepository.Delete(id);
 
-        return Ok();
+        return result ? Ok() : BadRequest("İşlem tamamlanamadı");
     }
 }

@@ -28,10 +28,18 @@ public class TodoRepository
         return result;
     }
 
-    public void Add(TodoItem todoItem)
+    public bool Add(TodoItem todoItem)
     {
-        _dbContext.Set<TodoItem>().Add(todoItem);
-        _dbContext.SaveChanges();
+        try
+        {
+            _dbContext.Set<TodoItem>().Add(todoItem);
+            _dbContext.SaveChanges();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 
     public bool Update(int id, TodoItem todoItem)
@@ -51,10 +59,15 @@ public class TodoRepository
         return true;
     }
 
-    public void Delete(int id)
+    public bool Delete(int id)
     {
         var todo = _dbContext.Set<TodoItem>().Find(id);
+
+        if (todo == null)
+            return false;
+
         _dbContext.Set<TodoItem>().Remove(todo);
         _dbContext.SaveChanges();
+        return true;
     }
 }
