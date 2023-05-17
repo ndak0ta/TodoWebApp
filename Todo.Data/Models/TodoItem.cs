@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Todo.Data.Models;
 
@@ -11,5 +13,5 @@ public class TodoItem
     
     public string? Body { get; set; } 
     
-    public DateTime Date { get; set; } 
+    public DateTime Date { get; set; }
 }

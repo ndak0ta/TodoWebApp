@@ -9,5 +9,5 @@ public class TodoDbContext : DbContext
     {
     }
     
-    public DbSet<TodoItem> ToDo { get; set; }
+    public DbSet<TodoItem> Todo { get; set; }
 }

@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
+using Todo.Data.Contexts;
 using Todo.Data.Models;
 
 namespace Todo.Data.Repositories;
 
 public class TodoRepository
 {
-    private readonly DbContext _dbContext;
+    private readonly TodoDbContext _dbContext;
 
-    public TodoRepository(DbContext dbContext)
+    public TodoRepository(TodoDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -26,17 +27,28 @@ public class TodoRepository
 
         return result;
     }
-    
+
     public void Add(TodoItem todoItem)
     {
         _dbContext.Set<TodoItem>().Add(todoItem);
         _dbContext.SaveChanges();
     }
-    
-    public void Update(TodoItem todoItem)
+
+    public bool Update(int id, TodoItem todoItem)
     {
-        _dbContext.Set<TodoItem>().Update(todoItem);
+        var existingTodoItem = _dbContext.Todo.FirstOrDefault(t => t.Id == id);
+
+        if (existingTodoItem == null)
+        {
+            return false;
+        }
+
+        existingTodoItem.Header = todoItem.Header ?? existingTodoItem.Header;
+        existingTodoItem.Body = todoItem.Body ?? existingTodoItem.Body;
+
         _dbContext.SaveChanges();
+
+        return true;
     }
 
     public void Delete(int id)

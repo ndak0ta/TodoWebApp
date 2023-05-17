@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Todo.Data;
+using Todo.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
