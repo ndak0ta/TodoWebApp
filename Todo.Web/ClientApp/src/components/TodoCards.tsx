@@ -41,7 +41,11 @@ export default function TodoCards({ token }: TodoCardsProps) {
     const handleAddTodo = async (e: Event, todoItem: { Header: string, Body: string, Date: Date }) => {
         e.preventDefault();
 
-        await axios.post('/api/todo', todoItem)
+        await axios.post('/api/todo', todoItem, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(() => handleGetData())
             .catch((err) => console.error(err));
     }
@@ -69,7 +73,7 @@ export default function TodoCards({ token }: TodoCardsProps) {
 
     useEffect(() => {
         handleGetData();
-    }, [token]);
+    }, []);
 
     return (
         <Container>
@@ -77,9 +81,9 @@ export default function TodoCards({ token }: TodoCardsProps) {
             {error && (<div>{`Hata - ${error}`}</div>)}
 
             <Grid container rowSpacing={5} columnSpacing={15}>
-                {todoItems && (todoItems as TodoItem[]).map((todoItem: TodoItem) => (
+                {todoItems && (todoItems as TodoItem[]).map((todoItem: TodoItem, index) => (
                     <Grid item xl={3}>
-                        <TodoCard key={todoItem.id} todoItem={todoItem} onUpdateTodo={handleUpdateTodo} onRemoveTodo={handleRemoveTodo}/>
+                        <TodoCard key={index} todoItem={todoItem} onUpdateTodo={handleUpdateTodo} onRemoveTodo={handleRemoveTodo}/>
                     </Grid>
                 ))}
                 {!loading &&

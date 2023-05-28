@@ -18,7 +18,7 @@ public class UserController: ControllerBase
 	{
 	}
 
-    private string GenerateJwtToken(string username)
+    private string GenerateJwtToken(string userId)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes("RIqObkmmz7s8T59kZKpcbzu669IcOXC60rid6uxNuX6Eq/iY0ZaTmgUMfFUYI1BM");
@@ -26,7 +26,7 @@ public class UserController: ControllerBase
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, username)
+                new Claim("userId", userId)
             }),
             Expires = DateTime.UtcNow.AddHours(1),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -47,13 +47,12 @@ public class UserController: ControllerBase
     {
         var user = JsonSerializer.Deserialize<User>(body.GetRawText());
 
-        // Kullanıcıyı doğrula
+        user.Id = 1;
+
         if (IsValidUser(user.userName, user.password))
         {
-            // JWT oluştur
-            var token = GenerateJwtToken(user.userName);
+            var token = GenerateJwtToken(user.Id.ToString());
 
-            // JWT'yi kullanıcıya döndür
             return Ok(new { token });
         }
 

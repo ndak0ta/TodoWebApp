@@ -6,7 +6,7 @@ namespace Todo.Infrastructure.Repositories;
 
 public interface ITodoRepository
 {
-    public IEnumerable<TodoItem> GetAll();
+    public IEnumerable<TodoItem> GetAll(int userId);
     public TodoItem GetById(int id);
     public bool Add(TodoItem todoItem);
     public bool Update(int id, TodoItem todoItem);
@@ -15,22 +15,23 @@ public interface ITodoRepository
 
 public class TodoRepository : ITodoRepository
 {
-    private readonly TodoDbContext _dbContext;
+    private readonly TodoDbContext _todoDbContext;
 
-    public TodoRepository(TodoDbContext dbContext)
+    public TodoRepository(TodoDbContext todoDbContext)
     {
-        _dbContext = dbContext;
+        _todoDbContext = todoDbContext;
     }
 
-    public IEnumerable<TodoItem> GetAll()
+    public IEnumerable<TodoItem> GetAll(int userId)
     {
-        var result = _dbContext.Set<TodoItem>().ToList();
+        var result = _todoDbContext.Set<TodoItem>().Where(todo => todo.userId == userId).ToList();
+
         return result;
     }
 
     public TodoItem GetById(int id)
     {
-        var result = _dbContext.Set<TodoItem>().FirstOrDefault(p => p.Id == id);
+        var result = _todoDbContext.Set<TodoItem>().FirstOrDefault(todo => todo.Id == id);
 
         if (result == null)
             throw new ArgumentException(nameof(result) + " Böyle bir todo yok");
@@ -42,8 +43,8 @@ public class TodoRepository : ITodoRepository
     { 
         try
         {
-            _dbContext.Set<TodoItem>().Add(todoItem);
-            _dbContext.SaveChanges();
+            _todoDbContext.Set<TodoItem>().Add(todoItem);
+            _todoDbContext.SaveChanges();
             return true;
         }
         catch (Exception)
@@ -54,7 +55,7 @@ public class TodoRepository : ITodoRepository
 
     public bool Update(int id, TodoItem todoItem)
     {
-        var existingTodoItem = _dbContext.TodoItem?.FirstOrDefault(t => t.Id == id);
+        var existingTodoItem = _todoDbContext.TodoItem?.FirstOrDefault(todo => todo.Id == id);
 
         if (existingTodoItem == null)
         {
@@ -64,20 +65,20 @@ public class TodoRepository : ITodoRepository
         existingTodoItem.Header = todoItem.Header ?? existingTodoItem.Header;
         existingTodoItem.Body = todoItem.Body ?? existingTodoItem.Body;
 
-        _dbContext.SaveChanges();
+        _todoDbContext.SaveChanges();
 
         return true;
     }
 
     public bool Delete(int id)
     {
-        var todo = _dbContext.Set<TodoItem>().Find(id);
+        var todo = _todoDbContext.Set<TodoItem>().Find(id);
 
         if (todo == null)
             return false;
 
-        _dbContext.Set<TodoItem>().Remove(todo);
-        _dbContext.SaveChanges();
+        _todoDbContext.Set<TodoItem>().Remove(todo);
+        _todoDbContext.SaveChanges();
 
         return true;
     }

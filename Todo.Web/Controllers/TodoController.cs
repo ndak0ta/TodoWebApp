@@ -5,9 +5,13 @@ using Todo.Data.Contexts;
 using Todo.Data.Models;
 using Todo.Business.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace Todo.Web.Controllers;
 
+[AllowAnonymous]
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class TodoController : ControllerBase
@@ -19,12 +23,15 @@ public class TodoController : ControllerBase
         _todoService = todoService;
     }
 
-    [AllowAnonymous]
-    [Authorize]
     [HttpGet]
     public IActionResult Get()
     {
-        var todoItems = _todoService.GetAll();
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+        if (identity == null)
+            return BadRequest("Kullanıcı bilgisine erişilemedi");
+
+        var todoItems = _todoService.GetAll(identity);
 
         return Ok(todoItems);
     }
@@ -39,8 +46,13 @@ public class TodoController : ControllerBase
 
     [HttpPost]
     public IActionResult Add([FromBody] JsonElement body)
-    { 
-        var result = _todoService.Add(body);
+    {
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+
+        if (identity == null)
+            return BadRequest("Kullanıcı bilgisine erişilemedi");
+
+        var result = _todoService.Add(body, identity);
 
         return result ? Ok() : BadRequest("İşlem tamamlanamadı");
     }
