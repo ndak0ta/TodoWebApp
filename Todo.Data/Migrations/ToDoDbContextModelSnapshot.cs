@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Todo.Data;
 using Todo.Data.Contexts;
 
 #nullable disable
@@ -12,7 +11,7 @@ using Todo.Data.Contexts;
 namespace Todo.Data.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    partial class ToDoDbContextModelSnapshot : ModelSnapshot
+    partial class TodoDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +22,7 @@ namespace Todo.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Todo.Data.ToDo", b =>
+            modelBuilder.Entity("Todo.Data.Models.TodoItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,9 +39,51 @@ namespace Todo.Data.Migrations
                     b.Property<string>("Header")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ToDo");
+                    b.HasIndex("userId");
+
+                    b.ToTable("TodoItem");
+                });
+
+            modelBuilder.Entity("Todo.Data.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("Todo.Data.Models.TodoItem", b =>
+                {
+                    b.HasOne("Todo.Data.Models.User", "User")
+                        .WithMany("TodoItems")
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Todo.Data.Models.User", b =>
+                {
+                    b.Navigation("TodoItems");
                 });
 #pragma warning restore 612, 618
         }

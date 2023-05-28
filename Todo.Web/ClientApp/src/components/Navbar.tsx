@@ -1,7 +1,7 @@
 import * as React from "react";
 import {AppBar, Container, Toolbar, Typography} from "@mui/material";
 
-export default function NavBar() {
+export default function Navbar() {
     return (
         <AppBar position="static" sx={{marginBottom: 10}}>
             <Container>

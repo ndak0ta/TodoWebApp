@@ -9,5 +9,6 @@ public class TodoDbContext : DbContext
     {
     }
     
-    public DbSet<TodoItem> Todo { get; set; }
+    public DbSet<TodoItem>? TodoItem { get; set; }
+    public DbSet<User>? User { get; set; }
 }

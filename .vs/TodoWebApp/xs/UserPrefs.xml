@@ -1,0 +1,42 @@
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{9DD004D8-7572-48B6-B3A8-EEEC067EFB0D}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Todo.Web/ClientApp/src/pages/Dashboard.tsx">
+    <Files>
+      <File FileName="Todo.Web/Program.cs" />
+      <File FileName="Todo.Web/Controllers/UserController.cs" />
+      <File FileName="Todo.Infrastructure/Repositories/UserRepository.cs" />
+      <File FileName="Todo.Web/ClientApp/src/App.tsx" />
+      <File FileName="Todo.Web/ClientApp/src/pages/Login.tsx" />
+      <File FileName="Todo.Web/ClientApp/src/components/LoginForm.tsx" />
+      <File FileName="Todo.Web/ClientApp/src/components/TodoCards.tsx" />
+      <File FileName="Todo.Web/ClientApp/src/pages/Dashboard.tsx" Line="5" Column="12" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="TodoWebApp" expanded="True">
+            <Node name="Todo.Infrastructure" expanded="True">
+              <Node name="Repositories" expanded="True" />
+            </Node>
+            <Node name="Todo.Web" expanded="True">
+              <Node name="ClientApp" expanded="True">
+                <Node name="src" expanded="True">
+                  <Node name="components" expanded="True" />
+                  <Node name="pages" expanded="True">
+                    <Node name="Dashboard.tsx" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Properties" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Todo.Web PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+</Properties>

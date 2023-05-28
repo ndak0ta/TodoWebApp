@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Todo.Data.Models;
 
@@ -14,4 +13,9 @@ public class TodoItem
     public string? Body { get; set; } 
     
     public DateTime Date { get; set; }
+
+    [ForeignKey("User")]
+    public int userId { get; set; }
+
+    public User? User { get; set; }
 }

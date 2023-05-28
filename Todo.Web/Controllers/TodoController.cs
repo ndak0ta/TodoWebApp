@@ -1,8 +1,10 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Todo.Data.Contexts;
 using Todo.Data.Models;
-using Todo.Data.Repositories;
+using Todo.Business.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Todo.Web.Controllers;
 
@@ -10,19 +12,19 @@ namespace Todo.Web.Controllers;
 [Route("api/[controller]")]
 public class TodoController : ControllerBase
 {
-    private readonly TodoDbContext _context;
-    private readonly TodoRepository _todoRepository;
+    private readonly ITodoService _todoService;
 
-    public TodoController(TodoDbContext context)
+    public TodoController(ITodoService todoService)
     {
-        _context = context;
-        _todoRepository = new TodoRepository(_context);
+        _todoService = todoService;
     }
 
+    [AllowAnonymous]
+    [Authorize]
     [HttpGet]
     public IActionResult Get()
     {
-        var todoItems = _todoRepository.GetAll();
+        var todoItems = _todoService.GetAll();
 
         return Ok(todoItems);
     }
@@ -30,37 +32,23 @@ public class TodoController : ControllerBase
     [HttpGet("{id:int}")]
     public IActionResult GetById(int id)
     {
-        var todoItem = _todoRepository.GetById(id);
+        var todoItem = _todoService.GetById(id);
 
         return Ok(todoItem);
     }
 
     [HttpPost]
     public IActionResult Add([FromBody] JsonElement body)
-    {
-        var todoItem = JsonSerializer.Deserialize<TodoItem>(body.GetRawText());
-
-        if (todoItem == null)
-            return BadRequest("Invalid TodoItem data.");
-
-        var result = _todoRepository.Add(todoItem);
+    { 
+        var result = _todoService.Add(body);
 
         return result ? Ok() : BadRequest("İşlem tamamlanamadı");
     }
 
     [HttpPut("{id:int}")]
     public IActionResult Update(int id, [FromBody] JsonElement body)
-    {
-        var todoItem = JsonSerializer.Deserialize<TodoItem>(body.GetRawText(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        });
-
-        if (todoItem == null || todoItem.Id != id)
-            return BadRequest("Todo bulunamadı");
-
-        var result = _todoRepository.Update(id, todoItem);
+    { 
+        var result = _todoService.Update(id, body);
 
         return result ? Ok() : BadRequest("İşlem tammalanamadı");
     }
@@ -68,7 +56,7 @@ public class TodoController : ControllerBase
     [HttpDelete("{id:int}")]
     public IActionResult Delete(int id)
     {
-        var result = _todoRepository.Delete(id);
+        var result = _todoService.Delete(id);
 
         return result ? Ok() : BadRequest("İşlem tamamlanamadı");
     }

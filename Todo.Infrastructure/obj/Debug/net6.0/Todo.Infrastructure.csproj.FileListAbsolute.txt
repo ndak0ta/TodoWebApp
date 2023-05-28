@@ -1,0 +1,15 @@
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/bin/Debug/net6.0/Todo.Infrastructure.deps.json
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/bin/Debug/net6.0/Todo.Infrastructure.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/bin/Debug/net6.0/Todo.Infrastructure.pdb
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/bin/Debug/net6.0/Todo.Data.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/bin/Debug/net6.0/Todo.Data.pdb
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.csproj.AssemblyReference.cache
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.AssemblyInfoInputs.cache
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.AssemblyInfo.cs
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.csproj.CopyComplete
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/refint/Todo.Infrastructure.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.pdb
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Infrastructure/obj/Debug/net6.0/ref/Todo.Infrastructure.dll

@@ -1,0 +1,17 @@
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/bin/Debug/net6.0/Todo.Business.deps.json
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/bin/Debug/net6.0/Todo.Business.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/bin/Debug/net6.0/Todo.Business.pdb
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/bin/Debug/net6.0/Todo.Data.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/bin/Debug/net6.0/Todo.Infrastructure.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/bin/Debug/net6.0/Todo.Data.pdb
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/bin/Debug/net6.0/Todo.Infrastructure.pdb
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.csproj.AssemblyReference.cache
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.AssemblyInfoInputs.cache
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.AssemblyInfo.cs
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.csproj.CoreCompileInputs.cache
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.csproj.CopyComplete
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/refint/Todo.Business.dll
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/Todo.Business.pdb
+/Users/ndak0ta/Projects/TodoWebApp/Todo.Business/obj/Debug/net6.0/ref/Todo.Business.dll

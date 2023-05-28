@@ -1,6 +1,6 @@
 {
-  "short_name": "ToDo.Client",
-  "name": "ToDo.Client",
+  "short_name": "Todo",
+  "name": "Todo",
   "icons": [
     {
       "src": "favicon.ico",
