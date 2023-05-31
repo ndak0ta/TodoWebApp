@@ -53,13 +53,21 @@ export default function TodoCards({ token }: TodoCardsProps) {
     const handleUpdateTodo = async (e: MouseEvent<HTMLButtonElement>, updatedTodoItem: TodoItem) => {
         e.preventDefault();
 
-        await axios.put('api/todo/' + updatedTodoItem.id, updatedTodoItem)
+        await axios.put('api/todo', updatedTodoItem, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(() => handleGetData())
             .catch((err) => console.error(err));
     }
 
     const handleRemoveTodo = async (id: number) => {
-        await axios.delete("api/todo/" + id)
+        await axios.delete("api/todo/" + id, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(() => {
                 if (todoItems === null)
                     return
@@ -82,12 +90,12 @@ export default function TodoCards({ token }: TodoCardsProps) {
 
             <Grid container rowSpacing={5} columnSpacing={15}>
                 {todoItems && (todoItems as TodoItem[]).map((todoItem: TodoItem, index) => (
-                    <Grid item xl={3}>
-                        <TodoCard key={index} todoItem={todoItem} onUpdateTodo={handleUpdateTodo} onRemoveTodo={handleRemoveTodo}/>
+                    <Grid item xl={3} key={index}>
+                        <TodoCard todoItem={todoItem} onUpdateTodo={handleUpdateTodo} onRemoveTodo={handleRemoveTodo}/>
                     </Grid>
                 ))}
                 {!loading &&
-                    <Grid item xl={3}>
+                    <Grid item xl={3} key={todoItems && todoItems.length + 1}>
                         <TodoAddCard onAddTodo={handleAddTodo} />
                     </Grid>
                 }

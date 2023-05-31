@@ -12,7 +12,7 @@ interface LoginFormProps {
 }
 
 export default function LoginFrom({ setToken }: LoginFormProps) {
-    const [userName, setUserName] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
@@ -21,8 +21,9 @@ export default function LoginFrom({ setToken }: LoginFormProps) {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/api/user/login', { userName, password });
+            const response = await axios.post('/api/auth/login', { username, password });
             setToken(response.data.token);
+            localStorage.setItem('token', response.data.token)
             navigate('/');
         } catch (error) {
             console.error('Giriş yapılamadı:', error);
@@ -39,8 +40,8 @@ export default function LoginFrom({ setToken }: LoginFormProps) {
                             label="Kullanıcı Adı"
                             variant="outlined"
                             sx={{ display: 'block' }}
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                         <TextField
                             id="outlined-basic"

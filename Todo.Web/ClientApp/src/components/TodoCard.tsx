@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { MouseEvent } from "react";
 import {useEffect, useState} from "react";
 import {
     Button,
@@ -27,7 +27,7 @@ type TodoItem = {
 
 interface ITodoCardProps {
     todoItem: TodoItem;
-    onUpdateTodo: (e: React.MouseEvent<HTMLButtonElement>, updatedTodoItem: TodoItem) => void;
+    onUpdateTodo: (e: MouseEvent<HTMLButtonElement>, updatedTodoItem: TodoItem) => void;
     onRemoveTodo: (id: number) => void;
 }
 
@@ -53,7 +53,7 @@ export default function TodoCard(props: ITodoCardProps) {
         setOpen(false);
     };
     
-    const handleUpdateTodo = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleUpdateTodo = (e: MouseEvent<HTMLButtonElement>) => {
         const updatedTodo = {
             id: props.todoItem.id,
             header: header,

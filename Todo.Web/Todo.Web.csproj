@@ -49,6 +49,9 @@
       <ProjectReference Include="..\Todo.Infrastructure\Todo.Infrastructure.csproj">
         <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
       </ProjectReference>
+      <ProjectReference Include="..\Todo.Middleware\Todo.Middleware.csproj">
+        <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+      </ProjectReference>
     </ItemGroup>
 
     <ItemGroup>

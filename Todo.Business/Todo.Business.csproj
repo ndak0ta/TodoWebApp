@@ -8,12 +8,17 @@
 
   <ItemGroup>
     <None Remove="Service\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Service\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Todo.Data\Todo.Data.csproj" />
     <ProjectReference Include="..\Todo.Infrastructure\Todo.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
 </Project>

@@ -2,23 +2,33 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Todo.Data.Contexts;
-using Todo.Infrastructure.Repositories;
-using Todo.Business.Service;
 using System.Text;
 using Microsoft.Extensions.Options;
+using Todo.Infrastructure.Repositories;
+using Todo.Business.Service;
+using Todo.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
 
-// Add services to the container.
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddDbContext<TodoDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+
+
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+// builder.Services.AddTransient<IUserService, UserService>();
+
+builder.Services.AddTransient<IAuthService, AuthService>();
 
 builder.Services.AddTransient<ITodoRepository, TodoRepository>();
 builder.Services.AddTransient<ITodoService, TodoService>();
 
 builder.Services.AddControllersWithViews();
+
+// TODO issuer ve audience olayına bir daha bak
 
 builder.Services.AddAuthentication(options =>
 {
@@ -59,14 +69,16 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting();
 app.UseAuthentication();
+app.UseRouting();
 app.UseAuthorization();
+app.UseMiddleware<TokenExpirationMiddleware>();
 
 
 app.MapControllerRoute(
     name: "default",
-   pattern: "{controller}/{action=Index}/{id?}");
+   pattern: "{controller}/{action=Index}/{id?}"
+   );
 
 app.MapFallbackToFile("index.html");
 

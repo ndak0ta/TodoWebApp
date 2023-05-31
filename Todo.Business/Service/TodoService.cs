@@ -9,75 +9,61 @@ namespace Todo.Business.Service;
 
 public interface ITodoService
 {
-    IEnumerable<TodoItem> GetAll(ClaimsIdentity identity);
-    TodoItem GetById(int id);
-    bool Add(JsonElement body, ClaimsIdentity identity);
-    bool Update(int id, JsonElement body);
-    bool Delete(int id);
+    IEnumerable<TodoItem> GetAll(string userId);
+    TodoItem? GetById(int id);
+    bool Add(TodoItem todoItem, string userId);
+    bool Update(TodoItem todoItem, string userId);
+    bool Delete(int todoId, string userId);
 }
 
 public class TodoService : ITodoService
 {
     private readonly ITodoRepository _todoRepository;
 
-    private static int getUserIdFromIdentity(ClaimsIdentity identity)
-    {
-        var userIdClaim = identity?.FindFirst("userId");
-
-        if (userIdClaim == null)
-            throw new Exception("Kullanıcı bulunamadı");
-
-        string userId = userIdClaim.Value;
-
-        return int.Parse(userId);
-    }
-
     public TodoService(ITodoRepository todoRepository)
     {
         _todoRepository = todoRepository;
     }
 
-    public IEnumerable<TodoItem> GetAll(ClaimsIdentity identity)
+    public IEnumerable<TodoItem> GetAll(string userId)
     {
-        int userId = getUserIdFromIdentity(identity);
+        var result = _todoRepository.GetAll(int.Parse(userId));
 
-        return _todoRepository.GetAll(userId);
+        return result;
     }
 
-    public TodoItem GetById(int id)
+    public TodoItem? GetById(int id)
     {
         return _todoRepository.GetById(id);
     }
 
-    public bool Add(JsonElement body, ClaimsIdentity identity)
+    public bool Add(TodoItem todoItem, string userId)
     {
-        var todoItem = JsonSerializer.Deserialize<TodoItem>(body.GetRawText());
-        int userId = getUserIdFromIdentity(identity);
-
-        if (todoItem == null)
+        if (todoItem == null || userId == null)
             return false;
 
-        todoItem.userId = userId;
+        todoItem.userId = int.Parse(userId);
 
         return _todoRepository.Add(todoItem);
     }
 
-    public bool Update(int id, JsonElement body)
+    public bool Update(TodoItem todoItem, string userId)
     {
-        var todoItem = JsonSerializer.Deserialize<TodoItem>(body.GetRawText(), new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        });
-
-        if (todoItem == null || todoItem.Id != id)
+        if (todoItem == null || userId == null)
             return false;
 
-        return _todoRepository.Update(id, todoItem);
+        todoItem.userId = int.Parse(userId);
+
+        return _todoRepository.Update(todoItem);
     }
 
-    public bool Delete(int id)
+    public bool Delete(int todoId, string userId)
     {
-        return _todoRepository.Delete(id);
+        var todoToDelete = GetById(todoId);
+
+        if (todoToDelete == null || todoToDelete.Id != int.Parse(userId))
+            return false;
+
+        return _todoRepository.Delete(todoId);
     }
 }

@@ -26,12 +26,12 @@ public class TodoController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var userId = User.FindFirstValue("userId");
 
-        if (identity == null)
-            return BadRequest("Kullanıcı bilgisine erişilemedi");
+        if (string.IsNullOrEmpty(userId))
+            return BadRequest("Token alınamadı");
 
-        var todoItems = _todoService.GetAll(identity);
+        var todoItems = _todoService.GetAll(userId);
 
         return Ok(todoItems);
     }
@@ -39,36 +39,45 @@ public class TodoController : ControllerBase
     [HttpGet("{id:int}")]
     public IActionResult GetById(int id)
     {
+        // TODO tooken kontrolü yap
+
         var todoItem = _todoService.GetById(id);
+
+        if (todoItem == null)
+            return BadRequest("Todo bulunamadı");
 
         return Ok(todoItem);
     }
 
     [HttpPost]
-    public IActionResult Add([FromBody] JsonElement body)
+    public IActionResult Add(TodoItem todoItem)
     {
-        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var userId = User.FindFirstValue("userId");
 
-        if (identity == null)
-            return BadRequest("Kullanıcı bilgisine erişilemedi");
+        if (string.IsNullOrEmpty(userId))
+            return BadRequest("Token alınamadı");
 
-        var result = _todoService.Add(body, identity);
+        var result = _todoService.Add(todoItem, userId);
 
         return result ? Ok() : BadRequest("İşlem tamamlanamadı");
     }
 
-    [HttpPut("{id:int}")]
-    public IActionResult Update(int id, [FromBody] JsonElement body)
-    { 
-        var result = _todoService.Update(id, body);
+    [HttpPut]
+    public IActionResult Update(TodoItem todoItem)
+    {
+        var userId = User.FindFirstValue("userId");
+
+        var result = _todoService.Update(todoItem, userId);
 
         return result ? Ok() : BadRequest("İşlem tammalanamadı");
     }
 
-    [HttpDelete("{id:int}")]
-    public IActionResult Delete(int id)
+    [HttpDelete("{todoId:int}")]
+    public IActionResult Delete(int todoId)
     {
-        var result = _todoService.Delete(id);
+        var userId = User.FindFirstValue("userId");
+
+        var result = _todoService.Delete(todoId, userId);
 
         return result ? Ok() : BadRequest("İşlem tamamlanamadı");
     }
