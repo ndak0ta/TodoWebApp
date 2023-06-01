@@ -23,7 +23,7 @@ public class UserRepository: IUserRepository
     
     public int GetUserId(User user)
     {
-        var result = _todoDbContext.Set<User>().First(u => u.Username == user.Username && u.Password == user.Password);
+        var result = _todoDbContext.Set<User>().FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
 
         if (result == null)
             throw new Exception("kullanıcı bulunamadı");
