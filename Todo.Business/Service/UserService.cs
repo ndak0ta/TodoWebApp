@@ -31,7 +31,6 @@ public class UserService : IUserService
 
     public int GetUserId(User user)
     {
-
         return _userRepository.GetUserId(user);
     }
 

@@ -1,15 +1,21 @@
 ﻿<Properties StartupConfiguration="{9DD004D8-7572-48B6-B3A8-EEEC067EFB0D}|Default" GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Todo.Web/Controllers/AuthController.cs">
+  <MonoDevelop.Ide.ItemProperties.Todo.Web PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Todo.Data/Contexts/TodoDbContext.cs">
     <Files>
-      <File FileName="Todo.Web/Program.cs" Line="75" Column="4" />
-      <File FileName="Todo.Web/Controllers/TodoController.cs" Line="31" Column="1" />
-      <File FileName="Todo.Business/Service/TodoService.cs" Line="33" Column="1" />
-      <File FileName="Todo.Web/Controllers/AuthController.cs" Line="16" Column="52" />
-      <File FileName="Todo.Business/Service/AuthService.cs" Line="53" Column="34" />
-      <File FileName="Todo.Middleware/TokenExpirationMiddleware.cs" Line="14" Column="65" />
-      <File FileName="Todo.Web/ClientApp/src/components/LoginForm.tsx" Line="31" Column="7" />
-      <File FileName="Todo.Web/ClientApp/src/setupProxy.js" Line="9" Column="22" />
-      <File FileName="Todo.Infrastructure/Repositories/UserRepository.cs" Line="27" Column="1" />
+      <File FileName="Todo.Web/ClientApp/src/App.tsx" Line="54" Column="24" />
+      <File FileName="Todo.Web/ClientApp/src/pages/RegisterPage.tsx" Line="12" Column="1" />
+      <File FileName="Todo.Web/ClientApp/src/components/RegisterForm.tsx" Line="38" Column="49" />
+      <File FileName="Todo.Web/Controllers/UserController.cs" Line="40" Column="66" />
+      <File FileName="Todo.Business/Service/UserService.cs" Line="38" Column="6" />
+      <File FileName="Todo.Infrastructure/Repositories/UserRepository.cs" Line="17" Column="51" />
+      <File FileName="Todo.Infrastructure/Repositories/TodoRepository.cs" Line="75" Column="1" />
+      <File FileName="Todo.Business/Service/TodoService.cs" Line="49" Column="6" />
+      <File FileName="Todo.Web/ClientApp/src/components/Navbar.tsx" Line="38" Column="147" />
+      <File FileName="Todo.Data/Contexts/TodoDbContext.cs" Line="21" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,6 +26,9 @@
               <Node name="Service" expanded="True" />
             </Node>
             <Node name="Todo.Data" expanded="True">
+              <Node name="Contexts" expanded="True">
+                <Node name="TodoDbContext.cs" selected="True" />
+              </Node>
               <Node name="Models" expanded="True" />
             </Node>
             <Node name="Todo.Infrastructure" expanded="True">
@@ -33,9 +42,7 @@
                   <Node name="pages" expanded="True" />
                 </Node>
               </Node>
-              <Node name="Controllers" expanded="True">
-                <Node name="AuthController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Properties" expanded="True" />
             </Node>
           </Node>
@@ -43,11 +50,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.Todo.Web PreferredExecutionTarget="/System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
