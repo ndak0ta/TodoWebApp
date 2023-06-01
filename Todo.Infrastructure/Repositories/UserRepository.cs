@@ -9,6 +9,7 @@ public interface IUserRepository
 {
     public int GetUserId(User user);
     public bool Add(User user);
+    public bool Delete(int userId);
 }
 
 public class UserRepository: IUserRepository
@@ -42,6 +43,19 @@ public class UserRepository: IUserRepository
         {
             return false;
         }
+    }
+
+    public bool Delete(int userId)
+    {
+        var user = _todoDbContext.Set<User>().Find(userId);
+
+        if (user == null)
+            return false;
+
+        _todoDbContext.Set<User>().Remove(user);
+        _todoDbContext.SaveChanges();
+
+        return true;
     }
 }
 

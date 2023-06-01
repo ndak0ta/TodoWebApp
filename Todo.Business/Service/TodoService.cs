@@ -14,6 +14,7 @@ public interface ITodoService
     bool Add(TodoItem todoItem, string userId);
     bool Update(TodoItem todoItem, string userId);
     bool Delete(int todoId, string userId);
+    public bool DeleteAllByUserId(string userId);
 }
 
 public class TodoService : ITodoService
@@ -65,5 +66,10 @@ public class TodoService : ITodoService
             return false;
 
         return _todoRepository.Delete(todoId);
+    }
+
+    public bool DeleteAllByUserId(string userId)
+    {
+        return _todoRepository.DeleteAllByUserId(int.Parse(userId));
     }
 }

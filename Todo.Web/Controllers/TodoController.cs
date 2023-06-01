@@ -39,8 +39,6 @@ public class TodoController : ControllerBase
     [HttpGet("{id:int}")]
     public IActionResult GetById(int id)
     {
-        // TODO tooken kontrolü yap
-
         var todoItem = _todoService.GetById(id);
 
         if (todoItem == null)

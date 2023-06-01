@@ -11,6 +11,7 @@ public interface ITodoRepository
     public bool Add(TodoItem todoItem);
     public bool Update(TodoItem todoItem);
     public bool Delete(int id);
+    public bool DeleteAllByUserId(int userId);
 }
 
 public class TodoRepository : ITodoRepository
@@ -53,7 +54,7 @@ public class TodoRepository : ITodoRepository
 
     public bool Update(TodoItem todoItem)
     {
-        var existingTodoItem = _todoDbContext.TodoItem?.FirstOrDefault(ti => ti.Id == todoItem.Id);
+        var existingTodoItem = _todoDbContext.TodoItem?.FirstOrDefault(t => t.Id == todoItem.Id);
 
         if (existingTodoItem == null)
         {
@@ -76,6 +77,19 @@ public class TodoRepository : ITodoRepository
             return false;
 
         _todoDbContext.Set<TodoItem>().Remove(todo);
+        _todoDbContext.SaveChanges();
+
+        return true;
+    }
+
+    public bool DeleteAllByUserId(int userId)
+    {
+        var recordsToDelete = _todoDbContext.Set<TodoItem>().Where(t => t.userId == userId);
+
+        if (recordsToDelete == null)
+            return false;
+
+        _todoDbContext.TodoItem?.RemoveRange(recordsToDelete);
         _todoDbContext.SaveChanges();
 
         return true;
