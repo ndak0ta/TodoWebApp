@@ -13,18 +13,27 @@ namespace Todo.Business.Service;
 
 public interface IUserService
 {
-
+    public int GetUserId(User user);
+    public bool Add(User user);
 }
 
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
-    private readonly IConfiguration _configuration;
 
-    public UserService(IUserRepository userRepository, IConfiguration configuration)
+    public UserService(IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _configuration = configuration;
+    }
+
+    public int GetUserId(User user)
+    {
+        return _userRepository.GetUserId(user);
+    }
+
+    public bool Add(User user)
+    {
+        return _userRepository.Add(user);
     }
 }
 

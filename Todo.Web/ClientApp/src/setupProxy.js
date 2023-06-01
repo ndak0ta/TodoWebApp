@@ -6,7 +6,8 @@ const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_H
 
 const context = [
     "/api/todo",
-    "/api/auth/login"
+    "/api/user",
+    "/api/auth"
 ];
 
 module.exports = function (app) {

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import {BrowserRouter, Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 import Layout from './components/Layout';
 import LoginPage from "./pages/LoginPage";
 import TodoPage from './pages/TodoPage';
-import axios from 'axios';
+import RegisterPage from './pages/RegisterPage';
 import './App.css';
 
 
@@ -18,6 +19,10 @@ export default function App() {
         {
             path: '/login',
             element: <LoginPage setToken={setToken} />
+        },
+        {
+            path: '/register',
+            element: <RegisterPage setToken={setToken} />
         }
     ];
 

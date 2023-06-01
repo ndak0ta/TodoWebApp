@@ -21,4 +21,12 @@ public class UserController: ControllerBase
 	{
         _userService = userService;
 	}
+
+	[HttpPost]
+	public IActionResult Add(User user)
+	{
+		_userService.Add(user);
+
+		return Ok();
+	}
 }

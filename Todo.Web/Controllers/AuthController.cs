@@ -7,8 +7,8 @@ using System.Text.Json;
 
 namespace Todo.Web.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
@@ -19,9 +19,9 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public IActionResult Login(LoginRequest loginRequest)
+    public IActionResult Login(User user)
     {
-        var token = _authService.Login(loginRequest);
+        var token = _authService.Login(user);
 
         if (token == null)
             return BadRequest("Giriş yapılamadı");

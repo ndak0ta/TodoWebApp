@@ -19,7 +19,7 @@ builder.Services.AddDbContext<TodoDbContext>(options =>
 
 
 builder.Services.AddTransient<IUserRepository, UserRepository>();
-// builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddTransient<IAuthService, AuthService>();
 
@@ -27,8 +27,6 @@ builder.Services.AddTransient<ITodoRepository, TodoRepository>();
 builder.Services.AddTransient<ITodoService, TodoService>();
 
 builder.Services.AddControllersWithViews();
-
-// TODO issuer ve audience olayına bir daha bak
 
 builder.Services.AddAuthentication(options =>
 {
@@ -45,8 +43,8 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey
         (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
-        ValidateIssuer = false,
-        ValidateAudience = false,
+        ValidateIssuer = true,
+        ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true
     };

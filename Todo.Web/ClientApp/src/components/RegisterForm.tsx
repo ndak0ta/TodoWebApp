@@ -7,11 +7,11 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 
 
-interface LoginFormProps {
+interface RegisterFormProps {
     setToken: Dispatch<SetStateAction<string | null>>;
 }
 
-export default function LoginFrom({ setToken }: LoginFormProps) {
+export default function RegisterForm({ setToken }: RegisterFormProps) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -30,10 +30,18 @@ export default function LoginFrom({ setToken }: LoginFormProps) {
         }
     };
 
+    const handleRegister = async (e: FormEvent) => {
+        e.preventDefault();
+
+        const response = await axios.post('api/user', { username, password })
+            .then(() => handleLogin(e))
+            .catch((err) => console.error(err));
+    }
+
     return (
         <Box sx={{ width: '100%' }}>
             <Card sx={{ width: 300, margin: 'auto' }}>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={handleRegister}>
                     <Box sx={{ width: '150', margin: 'auto', paddingTop: 2, paddingBottom: 2 }}>
                         <TextField
                             id="outlined-basic"
@@ -52,7 +60,7 @@ export default function LoginFrom({ setToken }: LoginFormProps) {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <Button type="submit" variant="contained">Giriş</Button>
+                        <Button type="submit" variant="contained">Üye ol</Button>
                     </Box>
                 </form>
             </Card>

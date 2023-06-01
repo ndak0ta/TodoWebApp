@@ -7,36 +7,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
-using Todo.Business.Models;
 using Todo.Infrastructure.Repositories;
+using Todo.Data.Models;
 
 
 namespace Todo.Business.Service;
 
 public interface IAuthService
 {
-    public string Login(LoginRequest loginRequest);
+    public string Login(User user);
     public string GenerateToken(int userId);
-    public string GetAuthToken();
-    public bool IsTokenExpired(string token);
 }
 
 public class AuthService : IAuthService
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IConfiguration _configuration;
-    private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
 
-    public AuthService(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IUserRepository userRepository)
+    public AuthService(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IUserService userService)
     {
-        _httpContextAccessor = httpContextAccessor;
         _configuration = configuration;
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
-    public string Login(LoginRequest loginRequest)
+    public string Login(User user)
     { 
-        var userId = _userRepository.GetUserId(loginRequest.Username, loginRequest.Password);
+        var userId = _userService.GetUserId(user);
 
         var token = GenerateToken(userId);
 
@@ -52,6 +48,7 @@ public class AuthService : IAuthService
         {
                 new Claim("userId", userId.ToString()),
         };
+
         var token = new JwtSecurityToken(
             issuer: issuer,
             audience: audience,
@@ -59,31 +56,8 @@ public class AuthService : IAuthService
             expires: DateTime.UtcNow.AddMinutes(1),
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
         );
+
         return new JwtSecurityTokenHandler().WriteToken(token);
-    }
-
-    public string GetAuthToken()
-    {
-        StringValues authorizationHeaders;
-        _httpContextAccessor.HttpContext.Request.Headers.TryGetValue("Authorization", out authorizationHeaders);
-        var token = authorizationHeaders.ToString().Replace("Bearer ", string.Empty);
-        return token;
-    }
-
-    public bool IsTokenExpired(string token)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var jwtToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
-
-        if (jwtToken == null)
-            return true;
-
-        var now = DateTime.UtcNow;
-
-        if (now > jwtToken.ValidTo)
-            return true;
-
-        return false;
     }
 }
 

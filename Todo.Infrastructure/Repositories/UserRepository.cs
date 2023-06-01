@@ -7,10 +7,8 @@ namespace Todo.Infrastructure.Repositories;
 
 public interface IUserRepository
 {
-    public int GetUserId(string? username, string? password);
+    public int GetUserId(User user);
     public bool Add(User user);
-    // public bool Update(int id, User user);
-    // public bool Delete(int id);
 }
 
 public class UserRepository: IUserRepository
@@ -22,9 +20,9 @@ public class UserRepository: IUserRepository
         _todoDbContext = todoDbContext;
 	}
     
-    public int GetUserId(string? username, string? password)
+    public int GetUserId(User user)
     {
-        var result = _todoDbContext.Set<User>().First(u => u.userName == username && u.password == password);
+        var result = _todoDbContext.Set<User>().First(u => u.Username == user.Username && u.Password == user.Password);
 
         if (result == null)
             throw new Exception("kullanıcı bulunamadı");
@@ -45,20 +43,6 @@ public class UserRepository: IUserRepository
             return false;
         }
     }
-
-    /*
-
-    public bool Update(int id, User user)
-    {
-
-    }
-
-    public bool Delete(int id)
-    {
-
-    }
-
-    */
 }
 
 
