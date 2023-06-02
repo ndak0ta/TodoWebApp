@@ -9,15 +9,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c80cdab6-60fe-4ec0-bf49-fa89596242ba" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Todo.Infrastructure/Exceptions/UserNotFoundException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoWebApp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoWebApp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/TodoWebApp/xs/UserPrefs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/TodoWebApp/xs/UserPrefs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/TodoWebApp/xs/project-cache/Todo.Infrastructure-Debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/TodoWebApp/xs/project-cache/Todo.Infrastructure-Debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/TodoWebApp/xs/project-cache/Todo.Middleware-Debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/TodoWebApp/xs/project-cache/Todo.Middleware-Debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/TodoWebApp/xs/project-cache/Todo.Web-Debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/TodoWebApp/xs/project-cache/Todo.Web-Debug.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo.Business/Service/TodoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/Service/TodoService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/Service/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/Service/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Business.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Business.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Business.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Business.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Business.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Business.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Data.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Data.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Data.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Data.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/bin/Debug/net6.0/Todo.Infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/Todo.Business.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/ref/Todo.Business.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/ref/Todo.Business.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/refint/Todo.Business.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Debug/net6.0/refint/Todo.Business.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Todo.Business.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Todo.Business.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/Todo.Business.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/Todo.Business.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Business/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Business/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/Repositories/TodoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/Repositories/TodoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/Todo.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/Todo.Infrastructure.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Data.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Data.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Data.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Data.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/bin/Debug/net6.0/Todo.Infrastructure.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/Todo.Infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/ref/Todo.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/ref/Todo.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/refint/Todo.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/obj/Debug/net6.0/refint/Todo.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/obj/Todo.Infrastructure.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Infrastructure/obj/Todo.Infrastructure.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Business.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Business.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Business.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Business.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Data.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Data.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Data.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Data.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Middleware.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Middleware.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Middleware.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/bin/Debug/net6.0/Todo.Middleware.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/Todo.Middleware.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/ref/Todo.Middleware.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/ref/Todo.Middleware.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/refint/Todo.Middleware.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/obj/Debug/net6.0/refint/Todo.Middleware.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Middleware/obj/Todo.Middleware.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Middleware/obj/Todo.Middleware.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Web/ClientApp/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Web/ClientApp/src/components/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo.Web/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Web/Controllers/TodoController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Web/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Web/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todo.Web/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Web/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.Web/Todo.Web.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.Web/Todo.Web.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,32 +84,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "/Users/ndak0ta/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache",
-      "/Users/ndak0ta/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache",
-      "/Users/ndak0ta/.local/share/Symbols/src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/ndak0ta/Library/Application Support/JetBrains/Rider2023.1/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/ndak0ta/Library/Application Support/JetBrains/Rider2023.1/resharper-host/SourcesCache&quot;,
+      &quot;/Users/ndak0ta/.local/share/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Todo.Web" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Todo.Web/Todo.Web.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="Todo.Web" />
+      <option name="LAUNCH_PROFILE_NAME" value="ToDo.Web" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -100,6 +151,7 @@
       <workItem from="1685304726717" duration="375000" />
       <workItem from="1685305581026" duration="577000" />
       <workItem from="1685306642233" duration="280000" />
+      <workItem from="1685725506527" duration="162000" />
     </task>
     <servers />
   </component>

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using Todo.Infrastructure.Repositories;
+using Todo.Infrastructure.Exceptions;
 using Todo.Data.Models;
 using Todo.Business.Models;
 
@@ -31,7 +32,9 @@ public class UserService : IUserService
 
     public int GetUserId(User user)
     {
+
         return _userRepository.GetUserId(user);
+
     }
 
     public bool Add(User user)

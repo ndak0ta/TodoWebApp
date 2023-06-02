@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Todo.Data.Contexts;
+﻿using Todo.Data.Contexts;
 using Todo.Data.Models;
 
 namespace Todo.Infrastructure.Repositories;

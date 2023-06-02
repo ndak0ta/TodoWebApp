@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Todo.Data.Contexts;
 using Todo.Data.Models;
+using Todo.Infrastructure.Exceptions;
 
 
 namespace Todo.Infrastructure.Repositories;
@@ -26,7 +27,7 @@ public class UserRepository: IUserRepository
         var result = _todoDbContext.Set<User>().FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
 
         if (result == null)
-            throw new Exception("kullanıcı bulunamadı");
+            throw new UserNotFoundException("kullanıcı bulunamadı");
 
         return result.Id;
     }

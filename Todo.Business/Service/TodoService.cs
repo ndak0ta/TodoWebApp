@@ -1,8 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Text.Json;
-using Todo.Data.Models;
+﻿using Todo.Data.Models;
 using Todo.Infrastructure.Repositories;
 
 namespace Todo.Business.Service;

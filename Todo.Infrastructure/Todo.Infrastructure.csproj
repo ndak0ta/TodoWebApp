@@ -8,9 +8,11 @@
 
   <ItemGroup>
     <None Remove="Repositories\" />
+    <None Remove="Exception\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Todo.Data\Todo.Data.csproj" />

@@ -26,6 +26,8 @@ builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<ITodoRepository, TodoRepository>();
 builder.Services.AddTransient<ITodoService, TodoService>();
 
+builder.Services.AddTransient<ExceptionMiddleware>();
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(options =>
@@ -52,6 +54,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,6 +67,8 @@ if (!app.Environment.IsDevelopment())
 else
 {
     app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
@@ -71,6 +77,7 @@ app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
 app.UseMiddleware<TokenExpirationMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 
 app.MapControllerRoute(

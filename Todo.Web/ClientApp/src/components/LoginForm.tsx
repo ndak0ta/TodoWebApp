@@ -9,9 +9,10 @@ import axios from 'axios';
 
 interface LoginFormProps {
     setToken: Dispatch<SetStateAction<string | null>>;
+    setError: Dispatch<SetStateAction<string | null>>
 }
 
-export default function LoginFrom({ setToken }: LoginFormProps) {
+export default function LoginFrom({ setToken, setError }: LoginFormProps) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -21,11 +22,17 @@ export default function LoginFrom({ setToken }: LoginFormProps) {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/api/auth/login', { username, password });
+            const response = await axios.post('/api/auth/login', { username, password }, {
+                validateStatus: (status) => {
+                    if (status === 404) {
+                        setError('Kullanıcı bulunamadı');
+                    }
+                    return false;
+            }});
             setToken(response.data.token);
-            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('token', response.data.token);
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.error('Giriş yapılamadı:', error);
         }
     };

@@ -1,12 +1,8 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Todo.Data.Contexts;
 using Todo.Data.Models;
 using Todo.Business.Service;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace Todo.Web.Controllers;
 
