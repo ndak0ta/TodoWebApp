@@ -23,16 +23,35 @@ public class UserController: ControllerBase
 	}
 
 	[HttpPost]
-	public void Add(User user)
+	public IActionResult Add(User user)
 	{
-		_userService.Add(user);
+		try
+		{
+			_userService.Add(user);
+
+			return Ok();
+		}
+		catch
+		{
+			return BadRequest("Beklenmeyen bir hata oluştu.");
+		}
 	}
 
 	[HttpDelete]
-	public void Delete()
+	public IActionResult Delete()
 	{
-		string userId = User.FindFirstValue("userId");
+		try
+		{
+            string userId = User.FindFirstValue("userId");
 
-        _userService.Delete(userId);
+            _userService.Delete(userId);
+
+            return Ok();
+        }
+		catch
+		{
+			return BadRequest("Beklenmeyen bir hata oluştu.");
+        }
+		
 	}
 }

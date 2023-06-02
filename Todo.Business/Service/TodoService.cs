@@ -7,9 +7,9 @@ public interface ITodoService
 {
     IEnumerable<TodoItem> GetAll(string userId);
     TodoItem? GetById(int id);
-    bool Add(TodoItem todoItem, string userId);
-    bool Update(TodoItem todoItem, string userId);
-    bool Delete(int todoId, string userId);
+    public void Add(TodoItem todoItem, string userId);
+    public void Update(TodoItem todoItem, string userId);
+    public void Delete(int todoId, string userId);
     public bool DeleteAllByUserId(string userId);
 }
 
@@ -34,34 +34,34 @@ public class TodoService : ITodoService
         return _todoRepository.GetById(id);
     }
 
-    public bool Add(TodoItem todoItem, string userId)
+    public void Add(TodoItem todoItem, string userId)
     {
         if (todoItem == null || userId == null)
-            return false;
+            throw new ArgumentException("Eksik veri girişi.");
 
         todoItem.userId = int.Parse(userId);
 
-        return _todoRepository.Add(todoItem);
+        _todoRepository.Add(todoItem);
     }
 
-    public bool Update(TodoItem todoItem, string userId)
+    public void Update(TodoItem todoItem, string userId)
     {
         if (todoItem == null || userId == null)
-            return false;
+            throw new ArgumentException("Eksik veri girişi.");
 
         todoItem.userId = int.Parse(userId);
 
-        return _todoRepository.Update(todoItem);
+        _todoRepository.Update(todoItem);
     }
 
-    public bool Delete(int todoId, string userId)
+    public void Delete(int todoId, string userId)
     {
         var todoToDelete = GetById(todoId);
 
         if (todoToDelete == null || todoToDelete.Id != int.Parse(userId))
-            return false;
+            throw new ArgumentException("Ekisk veya hatalı giriş");
 
-        return _todoRepository.Delete(todoId);
+        _todoRepository.Delete(todoId);
     }
 
     public bool DeleteAllByUserId(string userId)

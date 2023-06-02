@@ -46,33 +46,55 @@ public class TodoController : ControllerBase
     [HttpPost]
     public IActionResult Add(TodoItem todoItem)
     {
-        var userId = User.FindFirstValue("userId");
+        try
+        {
+            var userId = User.FindFirstValue("userId");
 
-        if (string.IsNullOrEmpty(userId))
-            return BadRequest("Token alınamadı");
+            if (userId == null)
+                throw new ArgumentException("Token alınamadı.");
 
-        var result = _todoService.Add(todoItem, userId);
+            _todoService.Add(todoItem, userId);
 
-        return result ? Ok() : BadRequest("İşlem tamamlanamadı");
+            return Ok();
+        }
+        catch
+        {
+            return BadRequest("Beklenmeyen bir hata oluştu.");
+        }
     }
+
 
     [HttpPut]
     public IActionResult Update(TodoItem todoItem)
     {
-        var userId = User.FindFirstValue("userId");
+        try
+        {
+            var userId = User.FindFirstValue("userId");
 
-        var result = _todoService.Update(todoItem, userId);
+            _todoService.Update(todoItem, userId);
 
-        return result ? Ok() : BadRequest("İşlem tammalanamadı");
+            return Ok();
+        }
+        catch
+        {
+            return BadRequest("Beklenmeyen bir hata oluştu.");
+        }
     }
 
     [HttpDelete("{todoId:int}")]
     public IActionResult Delete(int todoId)
     {
-        var userId = User.FindFirstValue("userId");
+        try
+        {
+            var userId = User.FindFirstValue("userId");
 
-        var result = _todoService.Delete(todoId, userId);
+            _todoService.Delete(todoId, userId);
 
-        return result ? Ok() : BadRequest("İşlem tamamlanamadı");
+            return Ok();
+        }
+        catch
+        {
+            return BadRequest("Beklenmeyen bir hata oluştu.");
+        }
     }
 }

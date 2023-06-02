@@ -1,4 +1,5 @@
-﻿using Todo.Data.Contexts;
+﻿using Todo.Infrastructure.Exceptions;
+using Todo.Data.Contexts;
 using Todo.Data.Models;
 
 namespace Todo.Infrastructure.Repositories;
@@ -7,9 +8,9 @@ public interface ITodoRepository
 {
     public IEnumerable<TodoItem> GetAll(int userId);
     public TodoItem? GetById(int id);
-    public bool Add(TodoItem todoItem);
-    public bool Update(TodoItem todoItem);
-    public bool Delete(int id);
+    public void Add(TodoItem todoItem);
+    public void Update(TodoItem todoItem);
+    public void Delete(int id);
     public bool DeleteAllByUserId(int userId);
 }
 
@@ -33,52 +34,37 @@ public class TodoRepository : ITodoRepository
     {
         var result = _todoDbContext.Set<TodoItem>().FirstOrDefault(todo => todo.Id == id);
 
-
         return result;
     }
 
-    public bool Add(TodoItem todoItem)
+    public void Add(TodoItem todoItem)
     { 
-        try
-        {
-            _todoDbContext.Set<TodoItem>().Add(todoItem);
-            _todoDbContext.SaveChanges();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
+        _todoDbContext.Set<TodoItem>().Add(todoItem);
+        _todoDbContext.SaveChanges();
     }
 
-    public bool Update(TodoItem todoItem)
+    public void Update(TodoItem todoItem)
     {
         var existingTodoItem = _todoDbContext.TodoItem?.FirstOrDefault(t => t.Id == todoItem.Id);
 
         if (existingTodoItem == null)
-        {
-            return false;
-        }
+            throw new NotFoundException("Üzerine yazılması gereken todo kaydı bulunamadı.");
 
         existingTodoItem.Header = todoItem.Header ?? existingTodoItem.Header;
         existingTodoItem.Body = todoItem.Body ?? existingTodoItem.Body;
 
         _todoDbContext.SaveChanges();
-
-        return true;
     }
 
-    public bool Delete(int id)
+    public void Delete(int id)
     {
         var todo = _todoDbContext.Set<TodoItem>().Find(id);
 
         if (todo == null)
-            return false;
+            throw new NotFoundException("Kayıt bulunamadı");
 
         _todoDbContext.Set<TodoItem>().Remove(todo);
         _todoDbContext.SaveChanges();
-
-        return true;
     }
 
     public bool DeleteAllByUserId(int userId)

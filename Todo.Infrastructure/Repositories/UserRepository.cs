@@ -28,7 +28,7 @@ public class UserRepository: IUserRepository
         var result = _todoDbContext.Set<User>().FirstOrDefault(u => u.Username == username);
 
         if (result == null)
-            throw new UserNotFoundException();
+            throw new NotFoundException("Kullanıcı bulunamadı.");
 
         return result;
     }
@@ -38,7 +38,7 @@ public class UserRepository: IUserRepository
         var user = _todoDbContext.Set<User>().FirstOrDefault(u => u.Username == inputUser.Username && u.Password == inputUser.Password);
 
         if (user == null)
-            throw new UserNotFoundException();
+            throw new NotFoundException("Kullanıcı bulunamadı.");
 
         return user.Id;
     }
@@ -48,7 +48,7 @@ public class UserRepository: IUserRepository
         var existingUser = GetUserByUsername(user.Username);
 
         if (existingUser != null)
-            throw new DuplicateRecordException();
+            throw new DuplicateRecordException("Aynı kullanıcı adıyla başka bir kullanıcı zaten mevcut.");
 
         _todoDbContext.Set<User>().Add(user);
         _todoDbContext.SaveChanges();
@@ -59,7 +59,7 @@ public class UserRepository: IUserRepository
         var user = _todoDbContext.Set<User>().Find(userId);
 
         if (user == null)
-            throw new UserNotFoundException();
+            throw new NotFoundException("Kullanıcı bulunamadı.");
 
         _todoDbContext.Set<User>().Remove(user);
         _todoDbContext.SaveChanges();

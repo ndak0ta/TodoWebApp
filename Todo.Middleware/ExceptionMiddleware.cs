@@ -30,17 +30,21 @@ public class ExceptionMiddleware : IMiddleware
 
         switch (ex)
         {
-            case UserNotFoundException:
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                errorMessage = "Kullanıcı bulunamadı";
-                break;
-            case DuplicateRecordException:
-                context.Response.StatusCode = (int)HttpStatusCode.Conflict;
-                errorMessage = "Tekrarlı kayıt hatası";
+            case ArgumentException:
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                errorMessage = ex.Message;
                 break;
             case DbUpdateException:
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 errorMessage = "Veritabanı hatası";
+                break;
+            case DuplicateRecordException:
+                context.Response.StatusCode = (int)HttpStatusCode.Conflict;
+                errorMessage = ex.Message;
+                break;
+            case NotFoundException:
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                errorMessage = ex.Message;
                 break;
             default:
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
