@@ -23,20 +23,16 @@ public class UserController: ControllerBase
 	}
 
 	[HttpPost]
-	public IActionResult Add(User user)
+	public void Add(User user)
 	{
-		var result = _userService.Add(user);
-
-		return result ? Ok() : BadRequest("İşlem gerçekleştirilemedi");
+		_userService.Add(user);
 	}
 
 	[HttpDelete]
-	public IActionResult Delete()
+	public void Delete()
 	{
 		string userId = User.FindFirstValue("userId");
 
-        var result = _userService.Delete(userId);
-
-		return result ? Ok() : BadRequest("işlem gerçekleştirilemedi");
+        _userService.Delete(userId);
 	}
 }

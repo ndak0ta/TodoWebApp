@@ -15,8 +15,8 @@ namespace Todo.Business.Service;
 public interface IUserService
 {
     public int GetUserId(User user);
-    public bool Add(User user);
-    public bool Delete(string userId);
+    public void Add(User user);
+    public void Delete(string userId);
 }
 
 public class UserService : IUserService
@@ -37,21 +37,15 @@ public class UserService : IUserService
 
     }
 
-    public bool Add(User user)
+    public void Add(User user)
     {
-        return _userRepository.Add(user);
+        _userRepository.Add(user);
     }
 
-    public bool Delete(string userId)
+    public void Delete(string userId)
     {
-        var result = _userRepository.Delete(int.Parse(userId));
-
-        if (result)
-            _todoService.DeleteAllByUserId(userId);
-        else
-            return false;
-
-        return true;
+        _userRepository.Delete(int.Parse(userId));
+        _todoService.DeleteAllByUserId(userId);
     }
 }
 

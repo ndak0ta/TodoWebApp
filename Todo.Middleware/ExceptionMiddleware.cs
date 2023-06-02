@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Net;
 using System.Text.Json;
@@ -24,14 +25,26 @@ public class ExceptionMiddleware : IMiddleware
     private async Task HandleExceptionAsync(HttpContext context, Exception ex)
     {
         context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
         var errorMessage = "Internal Server Error";
 
-        if (ex is UserNotFoundException)
+        switch (ex)
         {
-            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            errorMessage = "Kullanıcı bulunamadı";
+            case UserNotFoundException:
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                errorMessage = "Kullanıcı bulunamadı";
+                break;
+            case DuplicateRecordException:
+                context.Response.StatusCode = (int)HttpStatusCode.Conflict;
+                errorMessage = "Tekrarlı kayıt hatası";
+                break;
+            case DbUpdateException:
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                errorMessage = "Veritabanı hatası";
+                break;
+            default:
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                break;
         }
 
         var errorResponse = new { Message = errorMessage };

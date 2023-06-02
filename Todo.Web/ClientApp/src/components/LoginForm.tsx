@@ -9,7 +9,7 @@ import axios from 'axios';
 
 interface LoginFormProps {
     setToken: Dispatch<SetStateAction<string | null>>;
-    setError: Dispatch<SetStateAction<string | null>>
+    setError: Dispatch<SetStateAction<string | null>>;
 }
 
 export default function LoginFrom({ setToken, setError }: LoginFormProps) {
@@ -27,7 +27,7 @@ export default function LoginFrom({ setToken, setError }: LoginFormProps) {
                     if (status === 404) {
                         setError('Kullanıcı bulunamadı');
                     }
-                    return false;
+                    return (status >= 200 && status < 300);
             }});
             setToken(response.data.token);
             localStorage.setItem('token', response.data.token);

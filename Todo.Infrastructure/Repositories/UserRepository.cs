@@ -8,9 +8,10 @@ namespace Todo.Infrastructure.Repositories;
 
 public interface IUserRepository
 {
+    public User GetUserByUsername(string username);
     public int GetUserId(User user);
-    public bool Add(User user);
-    public bool Delete(int userId);
+    public void Add(User user);
+    public void Delete(int userId);
 }
 
 public class UserRepository: IUserRepository
@@ -21,42 +22,47 @@ public class UserRepository: IUserRepository
 	{
         _todoDbContext = todoDbContext;
 	}
-    
-    public int GetUserId(User user)
+
+    public User GetUserByUsername(string? username)
     {
-        var result = _todoDbContext.Set<User>().FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+        var result = _todoDbContext.Set<User>().FirstOrDefault(u => u.Username == username);
 
         if (result == null)
-            throw new UserNotFoundException("kullanıcı bulunamadı");
+            throw new UserNotFoundException();
 
-        return result.Id;
+        return result;
     }
 
-    public bool Add(User user)
+    public int GetUserId(User inputUser)
     {
-        try
-        {
-            _todoDbContext.Set<User>().Add(user);
-            _todoDbContext.SaveChanges();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
+        var user = _todoDbContext.Set<User>().FirstOrDefault(u => u.Username == inputUser.Username && u.Password == inputUser.Password);
+
+        if (user == null)
+            throw new UserNotFoundException();
+
+        return user.Id;
     }
 
-    public bool Delete(int userId)
+    public void Add(User user)
+    {
+        var existingUser = GetUserByUsername(user.Username);
+
+        if (existingUser != null)
+            throw new DuplicateRecordException();
+
+        _todoDbContext.Set<User>().Add(user);
+        _todoDbContext.SaveChanges();
+    }
+
+    public void Delete(int userId)
     {
         var user = _todoDbContext.Set<User>().Find(userId);
 
         if (user == null)
-            return false;
+            throw new UserNotFoundException();
 
         _todoDbContext.Set<User>().Remove(user);
         _todoDbContext.SaveChanges();
-
-        return true;
     }
 }
 

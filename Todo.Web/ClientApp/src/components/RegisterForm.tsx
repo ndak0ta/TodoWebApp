@@ -9,9 +9,10 @@ import axios from 'axios';
 
 interface RegisterFormProps {
     setToken: Dispatch<SetStateAction<string | null>>;
+    setError: Dispatch<SetStateAction<string | null>>;
 }
 
-export default function RegisterForm({ setToken }: RegisterFormProps) {
+export default function RegisterForm({ setToken, setError }: RegisterFormProps) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -33,8 +34,17 @@ export default function RegisterForm({ setToken }: RegisterFormProps) {
     const handleRegister = async (e: FormEvent) => {
         e.preventDefault();
 
-        const response = await axios.post('api/user', { username, password })
-            .then(() => handleLogin(e))
+        const response = await axios.post('api/user', { username, password }, {
+            validateStatus: (status) => {
+                if (status === 409) {
+                    setError('Bu kullanıcı adı zaten alınmış');
+                }
+                else {
+                    handleLogin(e);
+                }
+                return (status >= 200 && status < 300);
+            }
+        })
             .catch((err) => console.error(err));
     }
 
