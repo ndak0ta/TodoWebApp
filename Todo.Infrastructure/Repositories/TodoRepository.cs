@@ -1,17 +1,18 @@
 ﻿using Todo.Infrastructure.Exceptions;
 using Todo.Data.Contexts;
 using Todo.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Todo.Infrastructure.Repositories;
 
 public interface ITodoRepository
 {
-    public IEnumerable<TodoItem> GetAll(int userId);
-    public TodoItem? GetById(int id);
-    public void Add(TodoItem todoItem);
-    public void Update(TodoItem todoItem);
-    public void Delete(int id);
-    public bool DeleteAllByUserId(int userId);
+    Task<IEnumerable<TodoItem>> GetAllAsync(int userId);
+    Task<TodoItem> GetByIdAsync(int id);
+    Task AddAsync(TodoItem todoItem);
+    Task UpdateAsync(TodoItem todoItem);
+    Task DeleteAsync(int id);
+    Task DeleteAllByUserIdAsync(int userId);
 }
 
 public class TodoRepository : ITodoRepository
@@ -23,29 +24,32 @@ public class TodoRepository : ITodoRepository
         _todoDbContext = todoDbContext;
     }
 
-    public IEnumerable<TodoItem> GetAll(int userId)
+    public async Task<IEnumerable<TodoItem>> GetAllAsync(int userId)
     {
-        var result = _todoDbContext.Set<TodoItem>().Where(todo => todo.userId == userId).ToList();
+        var result = await _todoDbContext.Set<TodoItem>().Where(todo => todo.userId == userId).ToListAsync();
 
         return result;
     }
 
-    public TodoItem? GetById(int id)
+    public async Task<TodoItem> GetByIdAsync(int id)
     {
-        var result = _todoDbContext.Set<TodoItem>().FirstOrDefault(todo => todo.Id == id);
+        var result = await _todoDbContext.Set<TodoItem>().FirstOrDefaultAsync(todo => todo.Id == id);
+
+        if (result == null)
+            throw new NotFoundException("Kayıt bulunamadı.");
 
         return result;
     }
 
-    public void Add(TodoItem todoItem)
-    { 
+    public async Task AddAsync(TodoItem todoItem)
+    {
         _todoDbContext.Set<TodoItem>().Add(todoItem);
-        _todoDbContext.SaveChanges();
+        await _todoDbContext.SaveChangesAsync();
     }
 
-    public void Update(TodoItem todoItem)
+    public async Task UpdateAsync(TodoItem todoItem)
     {
-        var existingTodoItem = _todoDbContext.TodoItem?.FirstOrDefault(t => t.Id == todoItem.Id);
+        var existingTodoItem = await _todoDbContext.TodoItem?.FirstOrDefaultAsync(t => t.Id == todoItem.Id);
 
         if (existingTodoItem == null)
             throw new NotFoundException("Üzerine yazılması gereken todo kaydı bulunamadı.");
@@ -53,30 +57,28 @@ public class TodoRepository : ITodoRepository
         existingTodoItem.Header = todoItem.Header ?? existingTodoItem.Header;
         existingTodoItem.Body = todoItem.Body ?? existingTodoItem.Body;
 
-        _todoDbContext.SaveChanges();
+        await _todoDbContext.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public async Task DeleteAsync(int id)
     {
-        var todo = _todoDbContext.Set<TodoItem>().Find(id);
+        var todo = await _todoDbContext.Set<TodoItem>().FindAsync(id);
 
         if (todo == null)
             throw new NotFoundException("Kayıt bulunamadı");
 
         _todoDbContext.Set<TodoItem>().Remove(todo);
-        _todoDbContext.SaveChanges();
+        await _todoDbContext.SaveChangesAsync();
     }
 
-    public bool DeleteAllByUserId(int userId)
+    public async Task DeleteAllByUserIdAsync(int userId)
     {
-        var recordsToDelete = _todoDbContext.Set<TodoItem>().Where(t => t.userId == userId);
+        var recordsToDelete = await _todoDbContext.Set<TodoItem>().Where(t => t.userId == userId).ToListAsync();
 
         if (recordsToDelete == null)
-            return false;
+            throw new NotFoundException("Kayıt bulunamadı");
 
         _todoDbContext.TodoItem?.RemoveRange(recordsToDelete);
-        _todoDbContext.SaveChanges();
-
-        return true;
+        await _todoDbContext.SaveChangesAsync();
     }
 }

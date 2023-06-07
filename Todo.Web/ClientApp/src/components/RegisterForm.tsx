@@ -39,7 +39,7 @@ export default function RegisterForm({ setToken, setError }: RegisterFormProps) 
                 if (status === 409) {
                     setError('Bu kullanıcı adı zaten alınmış');
                 }
-                else {
+                if (status === 200) {
                     handleLogin(e);
                 }
                 return (status >= 200 && status < 300);

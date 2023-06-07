@@ -20,22 +20,22 @@ public class TodoController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get()
+    public async Task<IActionResult> GetAsync()
     {
         var userId = User.FindFirstValue("userId");
 
         if (string.IsNullOrEmpty(userId))
             return BadRequest("Token alınamadı");
 
-        var todoItems = _todoService.GetAll(userId);
+        var todoItems = await _todoService.GetAllAsync(userId);
 
         return Ok(todoItems);
     }
 
     [HttpGet("{id:int}")]
-    public IActionResult GetById(int id)
+    public async Task<IActionResult> GetByIdAsync(int id)
     {
-        var todoItem = _todoService.GetById(id);
+        var todoItem = await _todoService.GetByIdAsync(id);
 
         if (todoItem == null)
             return BadRequest("Todo bulunamadı");
@@ -44,57 +44,35 @@ public class TodoController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Add(TodoItem todoItem)
+    public async Task<IActionResult> AddAsync(TodoItem todoItem)
     {
-        try
-        {
-            var userId = User.FindFirstValue("userId");
+        var userId = User.FindFirstValue("userId");
 
-            if (userId == null)
-                throw new ArgumentException("Token alınamadı.");
+        if (userId == null)
+            throw new ArgumentNullException("Token alınamadı.");
 
-            _todoService.Add(todoItem, userId);
+        await _todoService.AddAsync(todoItem, userId);
 
-            return Ok();
-        }
-        catch
-        {
-            return BadRequest("Beklenmeyen bir hata oluştu.");
-        }
+        return Ok();
     }
 
-
     [HttpPut]
-    public IActionResult Update(TodoItem todoItem)
+    public async Task<IActionResult> UpdateAsync(TodoItem todoItem)
     {
-        try
-        {
-            var userId = User.FindFirstValue("userId");
+        var userId = User.FindFirstValue("userId");
 
-            _todoService.Update(todoItem, userId);
+        await _todoService.UpdateAsync(todoItem, userId);
 
-            return Ok();
-        }
-        catch
-        {
-            return BadRequest("Beklenmeyen bir hata oluştu.");
-        }
+        return Ok();
     }
 
     [HttpDelete("{todoId:int}")]
-    public IActionResult Delete(int todoId)
+    public async Task<IActionResult> DeleteAsync(int todoId)
     {
-        try
-        {
-            var userId = User.FindFirstValue("userId");
+        var userId = User.FindFirstValue("userId");
 
-            _todoService.Delete(todoId, userId);
+        await _todoService.DeleteAsync(todoId, userId);
 
-            return Ok();
-        }
-        catch
-        {
-            return BadRequest("Beklenmeyen bir hata oluştu.");
-        }
+        return Ok();
     }
 }

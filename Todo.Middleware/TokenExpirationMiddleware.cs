@@ -1,11 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
-using Todo.Business.Service;
-using Todo.Data.Contexts;
 
 
 namespace Todo.Middleware;
@@ -51,9 +47,6 @@ public class TokenExpirationMiddleware
     {
         using (var scope = _serviceProvider.CreateScope())
         {
-            // var authService = scope.ServiceProvider.GetRequiredService<IAuthService>();
-            // var dbContext = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
-
             var token = GetAuthToken();
 
             if (!string.IsNullOrEmpty(token) && IsTokenExpired(token))

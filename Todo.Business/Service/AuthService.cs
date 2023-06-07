@@ -1,13 +1,9 @@
-﻿using System.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
-using Todo.Infrastructure.Repositories;
 using Todo.Data.Models;
 
 
@@ -15,7 +11,7 @@ namespace Todo.Business.Service;
 
 public interface IAuthService
 {
-    public string Login(User user);
+    public Task<string> LoginAsync(User user);
     public string GenerateToken(int userId);
 }
 
@@ -24,15 +20,15 @@ public class AuthService : IAuthService
     private readonly IConfiguration _configuration;
     private readonly IUserService _userService;
 
-    public AuthService(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IUserService userService)
+    public AuthService(IConfiguration configuration, IUserService userService)
     {
         _configuration = configuration;
         _userService = userService;
     }
 
-    public string Login(User user)
-    { 
-        var userId = _userService.GetUserId(user);
+    public async Task<string> LoginAsync(User user)
+    {
+        var userId = await _userService.GetUserIdAsync(user);
 
         var token = GenerateToken(userId);
 

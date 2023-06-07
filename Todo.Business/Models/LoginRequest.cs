@@ -1,6 +1,4 @@
-﻿using System;
-
-
+﻿
 namespace Todo.Business.Models;
 
 public class LoginRequest

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Net;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Todo.Infrastructure.Exceptions;
 
 namespace Todo.Middleware;
@@ -30,13 +28,9 @@ public class ExceptionMiddleware : IMiddleware
 
         switch (ex)
         {
-            case ArgumentException:
+            case ArgumentNullException:
                 context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 errorMessage = ex.Message;
-                break;
-            case DbUpdateException:
-                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                errorMessage = "Veritabanı hatası";
                 break;
             case DuplicateRecordException:
                 context.Response.StatusCode = (int)HttpStatusCode.Conflict;
@@ -44,6 +38,10 @@ public class ExceptionMiddleware : IMiddleware
                 break;
             case NotFoundException:
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                errorMessage = ex.Message;
+                break;
+            case UnauthorizedAccessException:
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 errorMessage = ex.Message;
                 break;
             default:

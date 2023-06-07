@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Todo.Data.Models;
 using Todo.Business.Service;
-using Todo.Business.Models;
-using System.Text.Json;
 
 namespace Todo.Web.Controllers;
 
@@ -19,13 +16,14 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("login")]
-    public IActionResult Login(User user)
+    public async Task<IActionResult> Login(User user)
     {
-        var token = _authService.Login(user);
-
+        var token = await _authService.LoginAsync(user);
+    
         if (token == null)
             return BadRequest("Giriş yapılamadı");
-
+    
         return Ok(new { token });
     }
+    
 }

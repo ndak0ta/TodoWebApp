@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Todo.Data.Contexts;
 using System.Text;
-using Microsoft.Extensions.Options;
 using Todo.Infrastructure.Repositories;
 using Todo.Business.Service;
 using Todo.Middleware;
@@ -14,7 +13,7 @@ builder.Configuration.AddJsonFile("appsettings.json");
 
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddDbContext<TodoDbContext>(options => 
+builder.Services.AddDbContext<TodoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
 

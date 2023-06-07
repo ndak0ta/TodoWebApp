@@ -5,12 +5,12 @@ namespace Todo.Business.Service;
 
 public interface ITodoService
 {
-    IEnumerable<TodoItem> GetAll(string userId);
-    TodoItem? GetById(int id);
-    public void Add(TodoItem todoItem, string userId);
-    public void Update(TodoItem todoItem, string userId);
-    public void Delete(int todoId, string userId);
-    public bool DeleteAllByUserId(string userId);
+    Task<IEnumerable<TodoItem>> GetAllAsync(string userId);
+    Task<TodoItem> GetByIdAsync(int id);
+    Task AddAsync(TodoItem todoItem, string userId);
+    Task UpdateAsync(TodoItem todoItem, string userId);
+    Task DeleteAsync(int todoId, string userId);
+    Task DeleteAllByUserIdAsync(string userId);
 }
 
 public class TodoService : ITodoService
@@ -22,50 +22,53 @@ public class TodoService : ITodoService
         _todoRepository = todoRepository;
     }
 
-    public IEnumerable<TodoItem> GetAll(string userId)
+    public async Task<IEnumerable<TodoItem>> GetAllAsync(string userId)
     {
-        var result = _todoRepository.GetAll(int.Parse(userId));
+        var result = await _todoRepository.GetAllAsync(int.Parse(userId));
 
         return result;
     }
 
-    public TodoItem? GetById(int id)
+    public async Task<TodoItem> GetByIdAsync(int id)
     {
-        return _todoRepository.GetById(id);
+        return await _todoRepository.GetByIdAsync(id);
     }
 
-    public void Add(TodoItem todoItem, string userId)
+    public async Task AddAsync(TodoItem todoItem, string userId)
     {
         if (todoItem == null || userId == null)
-            throw new ArgumentException("Eksik veri girişi.");
+            throw new ArgumentNullException("Eksik veri girişi.");
 
         todoItem.userId = int.Parse(userId);
 
-        _todoRepository.Add(todoItem);
+        await _todoRepository.AddAsync(todoItem);
     }
 
-    public void Update(TodoItem todoItem, string userId)
+    public async Task UpdateAsync(TodoItem todoItem, string userId)
     {
         if (todoItem == null || userId == null)
-            throw new ArgumentException("Eksik veri girişi.");
+            throw new ArgumentNullException("Eksik veri girişi.");
 
         todoItem.userId = int.Parse(userId);
 
-        _todoRepository.Update(todoItem);
+        await _todoRepository.UpdateAsync(todoItem);
     }
 
-    public void Delete(int todoId, string userId)
+    public async Task DeleteAsync(int todoId, string userId)
     {
-        var todoToDelete = GetById(todoId);
+        var todoToDelete = await GetByIdAsync(todoId);
 
-        if (todoToDelete == null || todoToDelete.Id != int.Parse(userId))
-            throw new ArgumentException("Ekisk veya hatalı giriş");
+        if (todoToDelete == null)
+            throw new ArgumentNullException("Eksik giriş");
 
-        _todoRepository.Delete(todoId);
+        if (todoToDelete.userId != int.Parse(userId))
+            throw new UnauthorizedAccessException("Yetkisiz işlem.");
+
+        await _todoRepository.DeleteAsync(todoId);
     }
 
-    public bool DeleteAllByUserId(string userId)
+    public async Task DeleteAllByUserIdAsync(string userId)
     {
-        return _todoRepository.DeleteAllByUserId(int.Parse(userId));
+        await _todoRepository.DeleteAllByUserIdAsync(int.Parse(userId));
     }
 }
