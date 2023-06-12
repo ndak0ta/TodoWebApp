@@ -49,7 +49,7 @@ public class TodoRepository : ITodoRepository
 
     public async Task UpdateAsync(TodoItem todoItem)
     {
-        var existingTodoItem = await _todoDbContext.TodoItem?.FirstOrDefaultAsync(t => t.Id == todoItem.Id);
+        var existingTodoItem = await _todoDbContext.Set<TodoItem>().FirstOrDefaultAsync(t => t.Id == todoItem.Id);
 
         if (existingTodoItem == null)
             throw new NotFoundException("Üzerine yazılması gereken todo kaydı bulunamadı.");
