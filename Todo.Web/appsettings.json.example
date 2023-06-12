@@ -9,5 +9,10 @@
 "AllowedHosts": "*",
   "ConnectionStrings": {
     "ConnectionString": "Server=my_sql_server;Database=database;User Id=id;Password=password;"
+  },
+  "Jwt": {
+    "Issuer": "Issuer",
+    "Audience": "Audience",
+    "Key": "Your secret key"
   }
 }
