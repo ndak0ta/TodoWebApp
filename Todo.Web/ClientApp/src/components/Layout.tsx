@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps) {
     return (
         <div>
             <Navbar />
-            <Container>
+            <Container component="main">
                 {children}
             </Container>
         </div>
