@@ -12,7 +12,7 @@ public interface ITodoRepository
     Task AddAsync(TodoItem todoItem);
     Task UpdateAsync(TodoItem todoItem);
     Task DeleteAsync(int id);
-    Task DeleteAllByUserIdAsync(int userId);
+    Task DeleteAllByUserIdAsync(User user);
 }
 
 public class TodoRepository : ITodoRepository
@@ -71,9 +71,9 @@ public class TodoRepository : ITodoRepository
         await _todoDbContext.SaveChangesAsync();
     }
 
-    public async Task DeleteAllByUserIdAsync(int userId)
+    public async Task DeleteAllByUserIdAsync(User user)
     {
-        var recordsToDelete = await _todoDbContext.Set<TodoItem>().Where(t => t.userId == userId).ToListAsync();
+        var recordsToDelete = await _todoDbContext.Set<TodoItem>().Where(t => t.userId == user.Id).ToListAsync();
 
         if (recordsToDelete == null)
             throw new NotFoundException("Kayıt bulunamadı");

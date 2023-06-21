@@ -10,7 +10,7 @@ public interface ITodoService
     Task AddAsync(TodoItem todoItem, string userId);
     Task UpdateAsync(TodoItem todoItem, string userId);
     Task DeleteAsync(int todoId, string userId);
-    Task DeleteAllByUserIdAsync(string userId);
+    Task DeleteAllByUserIdAsync(User user);
 }
 
 public class TodoService : ITodoService
@@ -67,8 +67,8 @@ public class TodoService : ITodoService
         await _todoRepository.DeleteAsync(todoId);
     }
 
-    public async Task DeleteAllByUserIdAsync(string userId)
+    public async Task DeleteAllByUserIdAsync(User user)
     {
-        await _todoRepository.DeleteAllByUserIdAsync(int.Parse(userId));
+        await _todoRepository.DeleteAllByUserIdAsync(user);
     }
 }

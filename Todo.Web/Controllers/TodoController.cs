@@ -6,7 +6,6 @@ using System.Security.Claims;
 
 namespace Todo.Web.Controllers;
 
-[AllowAnonymous]
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
@@ -22,7 +21,7 @@ public class TodoController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAsync()
     {
-        var userId = User.FindFirstValue("userId");
+        var userId = User.FindFirstValue("userId"); // TODO gelen id verisini int olarak alınacak
 
         if (string.IsNullOrEmpty(userId))
             return BadRequest("Token alınamadı");

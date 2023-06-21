@@ -1,6 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 
 
@@ -21,7 +20,7 @@ public class TokenExpirationMiddleware
 
     private string GetAuthToken()
     {
-        StringValues authorizationHeaders;
+        StringValues authorizationHeaders; 
         _httpContextAccessor.HttpContext.Request.Headers.TryGetValue("Authorization", out authorizationHeaders);
         var token = authorizationHeaders.ToString().Replace("Bearer ", string.Empty);
         return token;
@@ -45,18 +44,15 @@ public class TokenExpirationMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        using (var scope = _serviceProvider.CreateScope())
+        var token = GetAuthToken();
+
+        if (!string.IsNullOrEmpty(token) && IsTokenExpired(token))
         {
-            var token = GetAuthToken();
-
-            if (!string.IsNullOrEmpty(token) && IsTokenExpired(token))
-            {
-                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                return;
-            }
-
-            await _next(context);
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return;
         }
+
+        await _next(context);
     }
 }
 

@@ -7,7 +7,7 @@ namespace Todo.Business.Service
     {
         Task<int> GetUserIdAsync(User user);
         Task AddAsync(User user); 
-        Task DeleteAsync(string userId);
+        Task DeleteAsync(User user);
     }
 
     public class UserService : IUserService 
@@ -31,10 +31,10 @@ namespace Todo.Business.Service
             await _userRepository.AddAsync(user);
         }
 
-        public async Task DeleteAsync(string userId)
+        public async Task DeleteAsync(User user)
         {
-            await _userRepository.DeleteAsync(int.Parse(userId));
-            await _todoService.DeleteAllByUserIdAsync(userId);
+            await _userRepository.DeleteAsync(user);
+            await _todoService.DeleteAllByUserIdAsync(user);
         }
     }
 }

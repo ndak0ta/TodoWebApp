@@ -25,11 +25,9 @@ namespace Todo.Web.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteAsync()
-        {
-            string userId = User.FindFirstValue("userId");
-
-            await _userService.DeleteAsync(userId);
+        public async Task<IActionResult> DeleteAsync(User user)
+        { 
+            await _userService.DeleteAsync(user);
 
             return Ok();
         }

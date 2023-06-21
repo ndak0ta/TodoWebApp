@@ -10,7 +10,7 @@ namespace Todo.Infrastructure.Repositories
         Task<User> GetUserByUsernameAsync(string username);
         Task<int> GetUserIdAsync(User user);
         Task AddAsync(User user);
-        Task DeleteAsync(int userId);
+        Task DeleteAsync(User user);
     }
 
     public class UserRepository : IUserRepository
@@ -55,13 +55,8 @@ namespace Todo.Infrastructure.Repositories
             }
         }
 
-        public async Task DeleteAsync(int userId)
+        public async Task DeleteAsync(User user)
         {
-            var user = await _todoDbContext.Set<User>().FindAsync(userId);
-
-            if (user == null)
-                throw new NotFoundException("Kullanıcı bulunamadı.");
-
             _todoDbContext.Set<User>().Remove(user);
             await _todoDbContext.SaveChangesAsync();
         }
