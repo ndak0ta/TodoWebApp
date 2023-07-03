@@ -52,7 +52,7 @@ public class TodoRepository : ITodoRepository
         var existingTodoItem = await _todoDbContext.Set<TodoItem>().FirstOrDefaultAsync(t => t.Id == todoItem.Id);
 
         if (existingTodoItem == null)
-            throw new NotFoundException("Üzerine yazılması gereken todo kaydı bulunamadı.");
+            throw new NotFoundException("Güncellenecek todo kaydı bulunamadı.");
 
         existingTodoItem.Header = todoItem.Header ?? existingTodoItem.Header;
         existingTodoItem.Body = todoItem.Body ?? existingTodoItem.Body;

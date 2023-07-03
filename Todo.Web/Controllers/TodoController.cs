@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 using Todo.Data.Models;
 using Todo.Business.Service;
-using System.Security.Claims;
 
 namespace Todo.Web.Controllers;
 
@@ -21,12 +21,14 @@ public class TodoController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAsync()
     {
-        var userId = User.FindFirstValue("userId"); // TODO gelen id verisini int olarak alınacak
+        var userId = User.FindFirstValue("userId"); //  gelen id verisini int olarak alınacak
 
         if (string.IsNullOrEmpty(userId))
             return BadRequest("Token alınamadı");
 
-        var todoItems = await _todoService.GetAllAsync(userId);
+        int userIdInt = StringToInt(userId, "Girdi Hatası. Verilen Kullanıcı id bilgisi hatalı");
+
+        var todoItems = await _todoService.GetAllAsync(userIdInt);
 
         return Ok(todoItems);
     }
@@ -47,10 +49,12 @@ public class TodoController : ControllerBase
     {
         var userId = User.FindFirstValue("userId");
 
-        if (userId == null)
+        if (string.IsNullOrEmpty(userId))
             throw new ArgumentNullException("Token alınamadı.");
 
-        await _todoService.AddAsync(todoItem, userId);
+        todoItem.userId = StringToInt(userId, "Girdi Hatası. Verilen Kullanıcı id bilgisi hatalı");
+
+        await _todoService.AddAsync(todoItem);
 
         return Ok();
     }
@@ -60,7 +64,12 @@ public class TodoController : ControllerBase
     {
         var userId = User.FindFirstValue("userId");
 
-        await _todoService.UpdateAsync(todoItem, userId);
+        if (string.IsNullOrEmpty(userId))
+            throw new ArgumentNullException("Token alınamadı.");
+
+        todoItem.userId = StringToInt(userId, "Girdi Hatası. Verilen Kullanıcı id bilgisi hatalı");
+
+        await _todoService.UpdateAsync(todoItem);
 
         return Ok();
     }
@@ -70,8 +79,21 @@ public class TodoController : ControllerBase
     {
         var userId = User.FindFirstValue("userId");
 
-        await _todoService.DeleteAsync(todoId, userId);
+        if (string.IsNullOrEmpty(userId))
+            return BadRequest("Token alınamadı");
+
+        int userIdInt = StringToInt(userId, "Girdi Hatası. Verilen Kullanıcı id bilgisi hatalı");
+
+        await _todoService.DeleteAsync(todoId, userIdInt);
 
         return Ok();
+    }
+
+    public static int StringToInt(string value, string exceptionString)
+    {
+        if (int.TryParse(value, out int valueInt))
+            return valueInt;
+        else
+            throw new ArgumentException(exceptionString);
     }
 }

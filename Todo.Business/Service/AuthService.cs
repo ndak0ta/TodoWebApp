@@ -41,7 +41,7 @@ public class AuthService : IAuthService
         var audience = _configuration["Jwt:Audience"];
         var claims = new[]
         {
-            new Claim("userId", userId.ToString()),
+            new Claim("userId", userId.ToString(), ClaimValueTypes.Integer),
         };
         var expires = DateTime.UtcNow.AddMinutes(1);
         var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);

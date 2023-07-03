@@ -25,9 +25,14 @@ namespace Todo.Web.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteAsync(User user)
-        { 
-            await _userService.DeleteAsync(user);
+        public async Task<IActionResult> DeleteAsync()
+        {
+            var userId = User.FindFirstValue("userId");
+
+            if (int.TryParse(userId, out int userIdInt))
+                await _userService.DeleteAsync(userIdInt);
+            else
+                throw new ArgumentException("Girdi Hatası. Verilen Kullanıcı id bilgisi hatalı");
 
             return Ok();
         }

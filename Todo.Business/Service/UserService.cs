@@ -1,18 +1,19 @@
 ﻿using Todo.Infrastructure.Repositories;
+using Todo.Infrastructure.Exceptions;
 using Todo.Data.Models;
 
 namespace Todo.Business.Service
 {
-    public interface IUserService 
+    public interface IUserService
     {
         Task<int> GetUserIdAsync(User user);
-        Task AddAsync(User user); 
-        Task DeleteAsync(User user);
+        Task AddAsync(User user);
+        Task DeleteAsync(int userId);
     }
 
-    public class UserService : IUserService 
+    public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository; 
+        private readonly IUserRepository _userRepository;
         private readonly ITodoService _todoService;
 
         public UserService(IUserRepository userRepository, ITodoService todoService)
@@ -31,8 +32,10 @@ namespace Todo.Business.Service
             await _userRepository.AddAsync(user);
         }
 
-        public async Task DeleteAsync(User user)
+        public async Task DeleteAsync(int userId)
         {
+            var user = await _userRepository.GetById(userId);
+
             await _userRepository.DeleteAsync(user);
             await _todoService.DeleteAllByUserIdAsync(user);
         }
