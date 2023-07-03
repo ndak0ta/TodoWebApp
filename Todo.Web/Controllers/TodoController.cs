@@ -21,7 +21,7 @@ public class TodoController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAsync()
     {
-        var userId = User.FindFirstValue("userId"); //  gelen id verisini int olarak alınacak
+        var userId = User.FindFirstValue("userId");
 
         if (string.IsNullOrEmpty(userId))
             return BadRequest("Token alınamadı");
