@@ -4,7 +4,6 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Todo.Data.Models;
-using System.Security.Cryptography;
 
 
 namespace Todo.Business.Service;

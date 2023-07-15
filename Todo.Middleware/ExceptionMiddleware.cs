@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 using System.Text.Json;
 using Todo.Infrastructure.Exceptions;
